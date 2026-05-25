@@ -9,19 +9,14 @@ public class Login {
     private String firstName;
     private String lastName;
 
-    // --- Validation Methods ---
+    // Validation Methods
 
-    /**
-     * Ensures username contains an underscore and is no more than 5 characters long.
-     */
+     // Ensures username contains an underscore and is no more than 5 characters long.
     public boolean checkUserName(String username) {
         return username.contains("_") && username.length() <= 5;
     }
 
-    /**
-     * Ensures password meets complexity rules:
-     * 8+ characters, a capital letter, a number, and a special character.
-     */
+    // Ensures password meets rules: 8+ characters, a capital letter, a number, and a special character.
     public boolean checkPasswordComplexity(String password) {
         boolean hasUpper = false;
         boolean hasDigit = false;
@@ -48,7 +43,7 @@ public class Login {
         return Pattern.matches(regex, phoneNumber);
     }
 
-    // --- Registration Messaging ---
+    // Registration Messaging
 
     public String registerUser(String username, String password, String firstName, String lastName, String phone) {
         if (!checkUserName(username)) {
@@ -72,7 +67,7 @@ public class Login {
         return "Username successfully captured.\nPassword successfully captured.\nCell number successfully added.";
     }
 
-    // --- Login Logic ---
+    // Login Logic
 
     public boolean loginUser(String username, String password) {
         return username.equals(this.registeredUsername) && password.equals(this.registeredPassword);

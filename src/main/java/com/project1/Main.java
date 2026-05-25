@@ -34,7 +34,7 @@ public class Main {
             boolean isLoggedIn = authSystem.loginUser(loginUser, loginPass);
             System.out.println(authSystem.returnLoginStatus(isLoggedIn));
 
-            // --- Menu Loop (QuickChat App Flow) ---
+            // Menu Loop ( PArt 2)
             if (isLoggedIn) {
                 System.out.println("\nWelcome to QuickChat");
                 boolean appRunning = true;

@@ -33,7 +33,6 @@ public class MessageTest {
 
     @Test
     public void testMessageHashIsCorrect() {
-        // Test case using the parameters and expectations matching page 15 requirements
         // ID input: "00" prefixed, message index "0", first word "Hi", last word "tonight?"
         Message msg = new Message("0012345678", 0, "+27718693002", "Hi Mike, can you join us for dinner tonight?");
         assertEquals("00:0:HITONIGHT", msg.getMessageHash());
