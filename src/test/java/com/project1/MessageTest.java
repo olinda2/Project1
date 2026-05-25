@@ -21,7 +21,7 @@ public class MessageTest {
 
     @Test
     public void testRecipientFormattingSuccess() {
-        Message msg = new Message("", "Hello World");
+        Message msg = new Message("+27718693002", "Hello World");
         assertEquals("Cell phone number successfully captured.", msg.checkRecipientCell());
     }
 

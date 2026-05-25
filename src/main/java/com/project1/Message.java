@@ -11,7 +11,6 @@ public class Message {
     private String messageDescription;
     private String messageHash;
 
-    // Global counter of successfully processed messages (Sent or Stored)
     private static int totalMessagesSent = 0;
 
     public Message(String recipientNumber, String messageDescription) {
@@ -22,7 +21,6 @@ public class Message {
         this.messageHash = createMessageHash();
     }
 
-    // Overloaded constructor for precise unit-testing values
     public Message(String messageID, int numMessagesSent, String recipientNumber, String messageDescription) {
         this.messageID = messageID;
         this.numMessagesSent = numMessagesSent;
@@ -31,11 +29,14 @@ public class Message {
         this.messageHash = createMessageHash();
     }
 
+    // Assessment Methods
+
     public boolean checkMessageID() {
         return this.messageID != null && this.messageID.length() <= 10;
     }
 
     public String checkRecipientCell() {
+        // Updated regex to allow up to 11 digits
         String regex = "^\\+\\d{1,11}$";
         if (this.recipientNumber != null && this.recipientNumber.matches(regex)) {
             return "Cell phone number successfully captured.";
@@ -58,15 +59,11 @@ public class Message {
             return "00:0:INVALID";
         }
 
-        // Get first two characters of the messageID
         String firstTwoID = this.messageID.substring(0, 2);
-
-        // Get first and last words
         String[] words = this.messageDescription.trim().split("\\s+");
         String firstWord = words[0].replaceAll("[^a-zA-Z]", "");
         String lastWord = words[words.length - 1].replaceAll("[^a-zA-Z]", "");
 
-        // Build the hash layout
         String hash = firstTwoID + ":" + this.numMessagesSent + ":" + firstWord + lastWord;
         return hash.toUpperCase();
     }
@@ -99,7 +96,6 @@ public class Message {
     // JSON Storage
 
     public void storeMessage() {
-        // Manually assemble a valid JSON string structure
         String json = "{\n" +
                 "  \"messageID\": \"" + messageID + "\",\n" +
                 "  \"numMessagesSent\": " + numMessagesSent + ",\n" +
@@ -115,8 +111,6 @@ public class Message {
         }
     }
 
-    // Helper Logic
-
     private String generateRandomMessageID() {
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
@@ -126,7 +120,6 @@ public class Message {
         return sb.toString();
     }
 
-    // Getters
     public String getMessageID() { return messageID; }
     public String getMessageHash() { return messageHash; }
 }
