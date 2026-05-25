@@ -3,25 +3,17 @@ package com.project1;
 import java.util.regex.Pattern;
 
 public class Login {
-    // Private variables to store user data
     private String registeredUsername;
     private String registeredPassword;
     private String firstName;
     private String lastName;
 
-    // --- Validation Methods ---
+    // Validation Methods
 
-    /**
-     * Ensures username contains an underscore and is no more than 5 characters long.
-     */
     public boolean checkUserName(String username) {
         return username.contains("_") && username.length() <= 5;
     }
 
-    /**
-     * Ensures password meets complexity rules:
-     * 8+ characters, a capital letter, a number, and a special character.
-     */
     public boolean checkPasswordComplexity(String password) {
         boolean hasUpper = false;
         boolean hasDigit = false;
@@ -32,23 +24,20 @@ public class Login {
         for (char c : password.toCharArray()) {
             if (Character.isUpperCase(c)) hasUpper = true;
             if (Character.isDigit(c)) hasDigit = true;
-            if (Pattern.compile("[!@#$%^&*(),.?\":{}|<>]").matcher(String.valueOf(c)).find()) hasSpecial = true;
+            if (Pattern.compile("[!@#$%^&*(),.?\":{}|<>]").matcher(String.valueOf(c)).find()) {
+                hasSpecial = true;
+            }
         }
-
         return hasUpper && hasDigit && hasSpecial;
     }
 
-    /**
-     * Research-based regex for cell phone validation.
-     * Criteria: International code (+) followed by no more than 10 characters.
-     */
     public boolean checkCellPhoneNumber(String phoneNumber) {
-        // Regex: starts with +, followed by 1 to 10 digits
-        String regex = "^\\+\\d{1,12}$";
+        // Updated regex to allow up to 11 digits
+        String regex = "^\\+\\d{1,11}$";
         return Pattern.matches(regex, phoneNumber);
     }
 
-    // --- Registration Messaging ---
+    // Registration Logic
 
     public String registerUser(String username, String password, String firstName, String lastName, String phone) {
         if (!checkUserName(username)) {
@@ -63,7 +52,7 @@ public class Login {
             return "Cell number is incorrectly formatted or does not contain an international code; please correct the number and try again.";
         }
 
-        // Save data if all checks pass
+        // Save registration data
         this.registeredUsername = username;
         this.registeredPassword = password;
         this.firstName = firstName;
@@ -72,7 +61,7 @@ public class Login {
         return "Username successfully captured.\nPassword successfully captured.\nCell number successfully added.";
     }
 
-    // --- Login Logic ---
+    // Login Logic
 
     public boolean loginUser(String username, String password) {
         return username.equals(this.registeredUsername) && password.equals(this.registeredPassword);

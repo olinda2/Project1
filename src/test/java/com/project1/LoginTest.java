@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LoginTest {
 
-    Login login = new Login();
+    private Login login = new Login();
 
     @Test
     public void testUsernameCorrectlyFormatted() {
@@ -19,25 +19,21 @@ public class LoginTest {
 
     @Test
     public void testPasswordMeetsComplexity() {
-        // Test Data: Ch&&sec@ke99!
         assertTrue(login.checkPasswordComplexity("Ch&&sec@ke99!"));
     }
 
     @Test
     public void testPasswordDoesNotMeetComplexity() {
-        // Test Data: password
         assertFalse(login.checkPasswordComplexity("password"));
     }
 
     @Test
     public void testPhoneNumberCorrectlyFormatted() {
-        // Test Data: +27838968976
-        assertTrue(login.checkCellPhoneNumber("+27838968976"));
+        assertTrue(login.checkCellPhoneNumber("+2783896897"));
     }
 
     @Test
     public void testPhoneNumberIncorrectlyFormatted() {
-        // Test Data: 08966553
         assertFalse(login.checkCellPhoneNumber("08966553"));
     }
 
